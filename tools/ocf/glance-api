@@ -35,11 +35,11 @@
 
 # Fill in some defaults if no values are specified
 
-OCF_RESKEY_binary_default="/usr/bin/glance-api"
+OCF_RESKEY_binary_default="glance-api"
 OCF_RESKEY_config_default="/etc/glance/glance-api.conf"
 OCF_RESKEY_user_default="glance"
 OCF_RESKEY_pid_default="$HA_RSCTMP/$OCF_RESOURCE_INSTANCE.pid"
-OCF_RESKEY_client_binary_default="/usr/bin/glance"
+OCF_RESKEY_client_binary_default="glance"
 
 : ${OCF_RESKEY_binary=${OCF_RESKEY_binary_default}}
 : ${OCF_RESKEY_config=${OCF_RESKEY_config_default}}
@@ -114,33 +114,33 @@ The pid file to use for this OpenStack ImageService (glance-api) instance
 
 <parameter name="os_username" unique="0" required="0">
 <longdesc lang="en">
-The username to use when logging into Keystone for monitoring purposes
+The username to use when logging into Identity (glance-api) for monitoring purposes
 </longdesc>
-<shortdesc lang="en">Keystone monitoring login</shortdesc>
+<shortdesc lang="en">Identity (glance-api) monitoring login</shortdesc>
 <content type="string" />
 </parameter>
 
 <parameter name="os_password" unique="0" required="0">
 <longdesc lang="en">
-The password to use when logging into Keystone for monitoring purposes
+The password to use when logging into Identity (glance-api) for monitoring purposes
 </longdesc>
-<shortdesc lang="en">Keystone monitoring password</shortdesc>
+<shortdesc lang="en">Identity (glance-api) monitoring password</shortdesc>
 <content type="string" />
 </parameter>
 
 <parameter name="os_tenant_name" unique="0" required="0">
 <longdesc lang="en">
-The tenant to use when logging into Keystone for monitoring purposes
+The tenant to use when logging into Identity (glance-api) for monitoring purposes
 </longdesc>
-<shortdesc lang="en">Keystone monitoring tenant</shortdesc>
+<shortdesc lang="en">Identity (glance-api) monitoring tenant</shortdesc>
 <content type="string" />
 </parameter>
 
 <parameter name="os_auth_url" unique="0" required="0">
 <longdesc lang="en">
-The URL pointing to this Keystone instance to use when logging in for monitoring purposes
+The URL pointing to this Identity (glance-api) instance to use when logging in for monitoring purposes
 </longdesc>
-<shortdesc lang="en">Keystone URL for monitoring login</shortdesc>
+<shortdesc lang="en">Identity (glance-api) URL for monitoring login</shortdesc>
 <content type="string" />
 </parameter>
 
@@ -239,7 +239,7 @@ glance_api_monitor() {
     # and do it if that's the case.
     if [ -n "$OCF_RESKEY_os_username" ] && [ -n "$OCF_RESKEY_os_password" ] \
     && [ -n "$OCF_RESKEY_os_tenant_name" ] && [ -n "$OCF_RESKEY_os_auth_url" ]; then
-	if ! check_binary $OCF_RESKEY_client_binary; then ocf_log warn "$OCF_RESKEY_client_binary \
+        if ! check_binary $OCF_RESKEY_client_binary; then ocf_log warn "$OCF_RESKEY_client_binary \
 	  missing, can not monitor!" else
 	    ocf_run $OCF_RESKEY_client_binary \
               --username "$OCF_RESKEY_os_username" \
@@ -249,7 +249,7 @@ glance_api_monitor() {
               index > /dev/null 2>&1; fi
         rc=$?
         if [ $rc -ne 0 ]; then
-            ocf_log err "Failed to connect to the OpenStack Identity (Keystone): $rc"
+            ocf_log err "Failed to connect to the OpenStack Identity (glance-api): $rc"
             return $OCF_NOT_RUNNING
         fi
     fi
