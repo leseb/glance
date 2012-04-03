@@ -255,7 +255,7 @@ glance_registry_monitor() {
         TOKEN=`curl -s -d  "{\"auth\":{\"passwordCredentials\": {\"username\": \"$OCF_RESKEY_os_username\", \
           \"password\": \"$OCF_RESKEY_os_password\"}, \"tenantName\": \"$OCF_RESKEY_os_tenant_name\"}}" \
           -H "Content-type: application/json" $OCF_RESKEY_keystone_url | python -c "import sys; import json; \
-          tok = json.loads(sys.stdin.read()); print tok['access']['token']['id'];"`
+          tok = json.loads(sys.stdin.read()); print tok['access']['token']['id'];" 2 > /dev/null`
         ocf_run -q curl -H "X-Auth-Token: $TOKEN" $OCF_RESKEY_url > /dev/null 2>&1
         rc=$?
         if [ $rc -ne 0 ]; then
