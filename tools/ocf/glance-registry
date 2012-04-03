@@ -194,6 +194,10 @@ glance_registry_validate() {
 
     check_binary $OCF_RESKEY_binary
     check_binary curl
+    check_binary tr
+    check_binary grep
+    check_binary cut
+    check_binary head
 
     # A config file on shared storage that is not available
     # during probes is OK.
