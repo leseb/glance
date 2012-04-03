@@ -40,8 +40,8 @@ OCF_RESKEY_binary_default="glance-registry"
 OCF_RESKEY_config_default="/etc/glance/glance-registry.conf"
 OCF_RESKEY_user_default="glance"
 OCF_RESKEY_pid_default="$HA_RSCTMP/$OCF_RESOURCE_INSTANCE.pid"
-OCF_RESKEY_url_default="http://0.0.0.0:9191/images"
-OCF_RESKEY_keystone_url_default="http://0.0.0.0:5000/v2.0/tokens"
+OCF_RESKEY_url_default="http://127.0.0.1:9191/images"
+OCF_RESKEY_keystone_url_default="http://127.0.0.1:5000/v2.0/tokens"
 
 : ${OCF_RESKEY_binary=${OCF_RESKEY_binary_default}}
 : ${OCF_RESKEY_config=${OCF_RESKEY_config_default}}
