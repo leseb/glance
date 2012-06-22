@@ -289,6 +289,7 @@ glance_registry_start() {
 
     # Spin waiting for the server to come up.
     # Let the CRM/LRM time us out if required
+    sleep 2
     while true; do
     glance_registry_monitor
     rc=$?
